@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatah Ibrahim | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+        }
+        
+        .skill-chip {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-chip:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 24px;
+            background: #3b82f6;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+    <!-- 3D Background Animation -->
+    <div id="3d-container" class="fixed top-0 left-0 w-full h-full z-0 opacity-20"></div>
+    
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-opacity-80 backdrop-filter backdrop-blur-lg bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold gradient-text">FATAH</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition">Home</a>
+                        <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition">About</a>
+                        <a href="#education" class="px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition">Education</a>
+                        <a href="#experience" class="px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition">Experience</a>
+                        <a href="#skills" class="px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition">Skills</a>
+                        <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium hover:text-blue-400 transition">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:text-blue-400 transition">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:text-blue-400 transition">About</a>
+                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium hover:text-blue-400 transition">Education</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:text-blue-400 transition">Experience</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:text-blue-400 transition">Skills</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:text-blue-400 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="gradient-text">Fatah Ibrahim</span>
+                    <br>
+                    <span id="typewriter" class="text-xl md:text-3xl font-normal text-gray-300"></span>
+                    <span class="typing-cursor"></span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-lg">
+                    Fresh Graduate of Informatics Engineering with passion for technology and continuous learning.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition shadow-lg">
+                        Contact Me
+                    </a>
+                    <a href="#about" class="px-6 py-3 border border-blue-400 text-blue-400 rounded-lg font-medium hover:bg-blue-400 hover:bg-opacity-10 transition">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-blue-400 shadow-xl floating">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-30"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-8xl font-bold text-white opacity-80">FI</div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-5 -right-5 md:-right-10 w-32 h-32 rounded-full bg-purple-600 opacity-20 blur-xl"></div>
+                <div class="absolute -top-5 -left-5 md:-left-10 w-32 h-32 rounded-full bg-blue-600 opacity-20 blur-xl"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">About Me</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="card-glass p-8 rounded-xl shadow-xl">
+                <h3 class="text-2xl font-bold mb-4 gradient-text">Who Am I?</h3>
+                <p class="text-gray-300 mb-6">
+                    My name is Fatah. I am a fresh graduate of informatics engineering from Indraprasta PGRI University. I have good communication skills and I am interested about IT, I like to learn something new in my life.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-3">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Location</p>
+                            <p class="text-gray-300">Depok, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mr-3">
+                            <i class="fas fa-envelope text-purple-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Email</p>
+                            <p class="text-gray-300">fatahibrar20@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-3">
+                            <i class="fas fa-phone text-blue-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Phone</p>
+                            <p class="text-gray-300">+62 857 1905 8505</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4 gradient-text inline-block">Personal Information</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-400 text-sm">Full Name</p>
+                            <p class="text-gray-300">Fatah Ibrahim Al Rasyid</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Education</p>
+                            <p class="text-gray-300">Informatics Engineering</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Graduation Year</p>
+                            <p class="text-gray-300">2024</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">University</p>
+                            <p class="text-gray-300">Indraprasta PGRI University</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 gradient-text inline-block">Interests</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-sm">Technology</div>
+                        <div class="px-4 py-2 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-sm">Networking</div>
+                        <div class="px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-sm">Security</div>
+                        <div class="px-4 py-2 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-sm">Learning</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-800 bg-opacity-50">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Education</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 transform -translate-x-1/2"></div>
+                
+                <!-- Timeline item 1 -->
+                <div class="mb-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right">
+                        <h3 class="text-xl font-bold text-blue-400">INDRAPRASTA PGRI UNIVERSITY</h3>
+                        <p class="text-gray-300">2020 - 2024</p>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-blue-500 border-4 border-gray-800 z-10 transform -translate-x-1/2 md:translate-x-0 md:left-1/2 absolute left-1/2 md:left-auto"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <div class="card-glass p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2 gradient-text">Informatics Engineering</h4>
+                            <p class="text-gray-300">Bachelor's degree in Informatics Engineering with focus on computer systems and information technology.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline item 2 -->
+                <div class="mb-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right order-2 md:order-1">
+                        <div class="card-glass p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2 gradient-text">Electrical Avionics</h4>
+                            <p class="text-gray-300">Vocational training in aircraft electrical systems and avionics technology.</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-purple-500 border-4 border-gray-800 z-10 transform -translate-x-1/2 md:translate-x-0 md:left-1/2 absolute left-1/2 md:left-auto"></div>
+                    <div class="md:w-1/2 md:pl-12 order-1 md:order-2">
+                        <h3 class="text-xl font-bold text-purple-400">VOCATIONAL HIGH SCHOOL 4 DEPOK</h3>
+                        <p class="text-gray-300">2016 - 2019</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline item 3 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right">
+                        <h3 class="text-xl font-bold text-blue-400">Indonesia University - KMMI Program</h3>
+                        <p class="text-gray-300">September 2020 – October 2020</p>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-blue-500 border-4 border-gray-800 z-10 transform -translate-x-1/2 md:translate-x-0 md:left-1/2 absolute left-1/2 md:left-auto"></div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <div class="card-glass p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2 gradient-text">Network Security Penetration Testing</h4>
+                            <p class="text-gray-300">Specialized course in network security and penetration testing techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Work Experience</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Experience 1 -->
+            <div class="card-glass p-6 rounded-xl hover:transform hover:-translate-y-2 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-chart-line text-blue-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">BPS – Statistics Indonesia</h3>
+                        <p class="text-sm text-gray-400">Field Surveyor</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">Population Census 2020 (September 2020 – October 2020)</p>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Collected 50+ family cards of Depok residents</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Guided residents to fill out online census forms</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Compiled daily progress reports</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Experience 2 -->
+            <div class="card-glass p-6 rounded-xl hover:transform hover:-translate-y-2 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-database text-purple-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">BPS – Statistics Indonesia</h3>
+                        <p class="text-sm text-gray-400">Data Entry</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">Social and Economy Registration 2022 (January 2023 – March 2023)</p>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Prepared and sorted documents for data entry</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Entered data into the BPS database</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Ensured data accuracy and resolved discrepancies</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Experience 3 -->
+            <div class="card-glass p-6 rounded-xl hover:transform hover:-translate-y-2 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-plane text-blue-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">GMF AeroAsia</h3>
+                        <p class="text-sm text-gray-400">Line Maintenance</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">Internship (September 2017 – November 2017)</p>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Refueled aircraft following safety procedures</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Ensured aircraft components were undamaged</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Completed flight checklists and reports</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Experience 4 -->
+            <div class="card-glass p-6 rounded-xl hover:transform hover:-translate-y-2 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-coffee text-purple-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Coco Summer & Superjuice Station</h3>
+                        <p class="text-sm text-gray-400">Barista & Cashier</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">September 2023 – January 2025</p>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Served customers and prepared drinks</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Conducted stock inventory</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Maintained outlet cleanliness</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Experience 5 -->
+            <div class="card-glass p-6 rounded-xl hover:transform hover:-translate-y-2 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-map-marked-alt text-blue-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">BPS – Statistics Indonesia</h3>
+                        <p class="text-sm text-gray-400">Mapping Surveyor</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">Economy Census 2026 (August 2025)</p>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Created segments on maps</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Counted buildings and business premises</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                        <span>Tagged building boundaries with Wilkerstat app</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Experience 6 -->
+            <div class="card-glass p-6 rounded-xl hover:transform hover:-translate-y-2 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-stadium text-purple-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Tour Guide JIS</h3>
+                        <p class="text-sm text-gray-400">Volunteer</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">Jakarta International Stadium (June 2022)</p>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Welcomed and guided visitors</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Provided information about the stadium</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-purple-400 mr-2 mt-1"></i>
+                        <span>Ensured visitor compliance with protocols</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-800 bg-opacity-50">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Skills</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-xl font-semibold mb-6 gradient-text">Professional Skills</h3>
+                <div class="space-y-4">
+                    <!-- Skill 1 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Organized</span>
+                            <span class="text-blue-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 2 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Time Management</span>
+                            <span class="text-blue-400">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 3 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Fast Learner</span>
+                            <span class="text-purple-400">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 4 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Public Speaking</span>
+                            <span class="text-purple-400">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-semibold mb-6 gradient-text">Technical Skills</h3>
+                <div class="flex flex-wrap gap-3">
+                    <div class="skill-chip px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center">
+                        <i class="fab fa-microsoft mr-2"></i>
+                        <span>Microsoft Word</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center">
+                        <i class="fab fa-microsoft mr-2"></i>
+                        <span>Microsoft Excel</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center">
+                        <i class="fab fa-microsoft mr-2"></i>
+                        <span>Microsoft PowerPoint</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full flex items-center">
+                        <i class="fab fa-adobe mr-2"></i>
+                        <span>Adobe Photoshop</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center">
+                        <i class="fas fa-network-wired mr-2"></i>
+                        <span>Network Security</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full flex items-center">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        <span>Penetration Testing</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full flex items-center">
+                        <i class="fas fa-database mr-2"></i>
+                        <span>Data Entry</span>
+                    </div>
+                    <div class="skill-chip px-4 py-2 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full flex items-center">
+                        <i class="fas fa-map-marked-alt mr-2"></i>
+                        <span>Geospatial Mapping</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Get In Touch</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+            <p class="text-gray-300 max-w-2xl mx-auto">
+                Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-xl font-semibold mb-6 gradient-text">Contact Information</h3>
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-gray-300">Location</h4>
+                            <p class="text-gray-400">Depok, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                            <i class="fas fa-envelope text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-gray-300">Email</h4>
+                            <p class="text-gray-400">fatahibrar20@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mr-4 mt-1">
+                            <i class="fas fa-phone text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-gray-300">Phone</h4>
+                            <p class="text-gray-400">+62 857 1905 8505</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mt-12 mb-6 gradient-text">Social Media</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 hover:bg-opacity-30 transition flex items-center justify-center text-blue-400">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-purple-500 bg-opacity-20 hover:bg-opacity-30 transition flex items-center justify-center text-purple-400">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 hover:bg-opacity-30 transition flex items-center justify-center text-blue-400">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-purple-500 bg-opacity-20 hover:bg-opacity-30 transition flex items-center justify-center text-purple-400">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card-glass p-8 rounded-xl">
+                <h3 class="text-xl font-semibold mb-6 gradient-text">Send Me a Message</h3>
+                <form>
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-300">
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-300">
+                    </div>
+                    <div class="mb-6">
+                        <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                        <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-300">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-300 mb-2">Message</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-300"></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition shadow-lg">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-900 bg-opacity-80">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold gradient-text">FATAH IBRAHIM AL RASYID</span>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    &copy; <span id="current-year"></span> All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Typewriter effect
+        const typewriter = new Typewriter('#typewriter', {
+            loop: true,
+            delay: 75,
+        });
+        
+        typewriter
+            .typeString('Informatics Engineer')
+            .pauseFor(1500)
+            .deleteAll()
+            .typeString('IT Enthusiast')
+            .pauseFor(1500)
+            .deleteAll()
+            .typeString('Fast Learner')
+            .pauseFor(1500)
+            .start();
+        
+        // 3D Animation
+        const container = document.getElementById('3d-container');
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        
+        // Create floating tech objects
+        const objects = [];
+        const geometry = new THREE.IcosahedronGeometry(1, 0);
+        
+        for (let i = 0; i < 15; i++) {
+            const material = new THREE.MeshPhongMaterial({
+                color: Math.random() * 0xffffff,
+                emissive: 0x072534,
+                side: THREE.DoubleSide,
+                flatShading: true,
+                transparent: true,
+                opacity: 0.7
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = Math.random() * 40 - 20;
+            mesh.position.y = Math.random() * 40 - 20;
+            mesh.position.z = Math.random() * 40 - 20;
+            mesh.scale.setScalar(Math.random() * 0.5 + 0.5);
+            
+            mesh.userData = {
+                speedX: Math.random() * 0.01 - 0.005,
+                speedY: Math.random() * 0.01 - 0.005,
+                speedZ: Math.random() * 0.01 - 0.005,
+                rotationX: Math.random() * 0.01 - 0.005,
+                rotationY: Math.random() * 0.01 - 0.005
+            };
+            
+            scene.add(mesh);
+            objects.push(mesh);
+        }
+        
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+        
+        const pointLight = new THREE.PointLight(0x3b82f6, 1, 50);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+        
+        camera.position.z = 30;
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            objects.forEach(obj => {
+                obj.position.x += obj.userData.speedX;
+                obj.position.y += obj.userData.speedY;
+                obj.position.z += obj.userData.speedZ;
+                
+                obj.rotation.x += obj.userData.rotationX;
+                obj.rotation.y += obj.userData.rotationY;
+                
+                // Bounce off boundaries
+                if (Math.abs(obj.position.x) > 25) obj.userData.speedX *= -1;
+                if (Math.abs(obj.position.y) > 25) obj.userData.speedY *= -1;
+                if (Math.abs(obj.position.z) > 25) obj.userData.speedZ *= -1;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#3b82f6"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#3b82f6",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
