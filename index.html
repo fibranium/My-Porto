@@ -48,7 +48,12 @@
             top: 0;
             left: 0;
             z-index: -1;
-            pointer-events: none; /* Prevent blocking clicks */
+            pointer-events: none;
+        }
+
+        /* Pastikan link bisa diklik dan cursor berubah */
+        a {
+            cursor: pointer;
         }
         
         .floating {
@@ -621,13 +626,15 @@
                 </div>
                 
                 <h3 class="text-xl font-semibold mt-12 mb-6 gradient-text">Social Media</h3>
-                <div class="flex space-x-4">
+                <div class="flex space-x-4 relative z-20">
                     <a href="https://www.linkedin.com/in/fatah-ibrahim-al-rasyid-aa7a5719b/" target="_blank"
-						class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 hover:bg-opacity-30 transition flex items-center justify-center text-blue-400">
+						class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 hover:bg-opacity-30 transition
+								flex items-center justify-center text-blue-400 cursor-pointer relative z-30">
                         <i class="fab fa-linkedin-in text-xl"></i>
                     </a>                 
                     <a href="https://github.com/fibranium" target="_blank"
-						class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 hover:bg-opacity-30 transition flex items-center justify-center text-blue-400">
+						class="w-12 h-12 rounded-full bg-blue-500 bg-opacity-20 hover:bg-opacity-30 transition 
+							flex items-center justify-center text-blue-400 cursor-pointer relative z-30">
                         <i class="fab fa-github text-xl"></i>
                     </a>                
                 </div>
